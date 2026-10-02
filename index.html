@@ -816,6 +816,11 @@ a.btn{text-decoration:none;display:inline-flex;align-items:center;justify-conten
 .countdown-sub{font-size:18px;color:var(--ink)}
 .nav-toggle[aria-expanded="true"]{background:var(--slate)}
 .music[aria-pressed="true"]{background:#2c5486}
+
+/* Scroll cue: centre word and arrow on the page's middle line */
+.hero-scroll{display:flex;flex-direction:column;align-items:center;text-align:center;width:max-content;padding-left:4px;line-height:1.2}
+.hero-scroll span{margin-top:2px;line-height:1}
+.hero-when .hw{display:block}
 </style>
 </head>
 <body>
@@ -1001,7 +1006,7 @@ const W = {
   parking: '',                      // e.g. 'Free parking on site; please arrive early.'
 
   dressCode: 'Elegant & joyful',
-  palette: 'Powder blue, navy, ivory & gold',   // set '' to hide
+  palette: '',                       // optional colour note under the dress code, e.g. 'Soft pastels'
 
   rsvpBy: '',                       // e.g. '24 October 2026'  <- ADD THIS
   contactName: '',                  // e.g. 'Mercy'
@@ -1048,7 +1053,7 @@ document.querySelectorAll('[data-pair]').forEach(e=>e.textContent=pair);
 document.querySelectorAll('[data-bride]').forEach(e=>e.textContent=W.bride);
 document.querySelectorAll('[data-groom]').forEach(e=>e.textContent=W.groom);
 document.title=pair+' — Where Forever Begins';
-$('heroWhen').innerHTML='<strong>'+esc(dateLong)+'</strong>'+(W.ceremonyTime?esc(fmtTime(W.ceremonyTime)+(W.endTime?' – '+fmtTime(W.endTime):''))+'<span class="sep">·</span>':'')+esc(W.venue)+'<span class="sep">·</span>'+esc(W.place);
+$('heroWhen').innerHTML='<strong>'+esc(dateLong)+'</strong>'+(W.ceremonyTime?'<span class="hw">'+esc(fmtTime(W.ceremonyTime)+(W.endTime?' – '+fmtTime(W.endTime):''))+'</span>':'')+'<span class="hw">'+esc(W.venue)+'<span class="sep">·</span>'+esc(W.place)+'</span>';
 $('revealDate').textContent=dmy.toUpperCase();
 $('revealDay').textContent=weekday.toUpperCase();
 $('venueName').textContent=W.venue+', '+W.place.split(',')[0];

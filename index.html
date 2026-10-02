@@ -911,6 +911,7 @@ a.btn{text-decoration:none;display:inline-flex;align-items:center;justify-conten
       <h2 class="section-title">Wedding Details</h2>
       <div class="details-grid" id="detailsGrid"></div>
       <div class="btn-row"><button class="btn" type="button" id="calendarBtn">Add to Calendar</button></div>
+      <button class="reveal-link" id="icsBtn" type="button" style="margin-top:-8px">Apple, Outlook or another calendar? Download the file</button>
     </div>
 
     <!-- Programme -->
@@ -1179,13 +1180,15 @@ function eventInfo(){
   if(W.rsvpBy)lines.push('Kindly RSVP by '+W.rsvpBy+'.');
   return {timed,end,where,desc:lines.join(' ')};
 }
-function calendarICS(){
+function calendarICS(mode){
   const ev=eventInfo();
   const dt=ev.timed?['DTSTART:'+utc(start),'DTEND:'+utc(ev.end)]:['DTSTART;VALUE=DATE:'+ymd(W.dateISO),'DTEND;VALUE=DATE:'+ymd(nextDay(W.dateISO))];
   const text=['BEGIN:VCALENDAR','VERSION:2.0','PRODID:-//'+pair+'//Wedding//EN','CALSCALE:GREGORIAN','BEGIN:VEVENT','UID:wedding-'+ymd(W.dateISO)+'@invite','DTSTAMP:'+utc(new Date()),...dt,
     'SUMMARY:'+pair+' — Wedding','LOCATION:'+ev.where.replace(/,/g,'\\,'),'DESCRIPTION:'+ev.desc.replace(/,/g,'\\,'),
     'BEGIN:VALARM','ACTION:DISPLAY','DESCRIPTION:Wedding tomorrow','TRIGGER:-P1D','END:VALARM','END:VEVENT','END:VCALENDAR'].join('\r\n');
-  const blob=new Blob([text],{type:'text/calendar;charset=utf-8'}),url=URL.createObjectURL(blob),a=document.createElement('a');
+  const blob=new Blob([text],{type:'text/calendar;charset=utf-8'}),url=URL.createObjectURL(blob);
+  if(mode==='open'){window.location.href=url;return}              // iPhone/iPad: shows the "Add to Calendar" sheet
+  const a=document.createElement('a');
   a.href=url;a.download=pair.replace(/[^\w]+/g,'-')+'-Wedding.ics';document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(url),1000);
 }
 function googleCalendar(){
@@ -1194,10 +1197,10 @@ function googleCalendar(){
   window.open('https://calendar.google.com/calendar/render?action=TEMPLATE&text='+encodeURIComponent(pair+' — Wedding')+'&dates='+dates+'&details='+encodeURIComponent(ev.desc)+'&location='+encodeURIComponent(ev.where),'_blank','noopener');
 }
 function addCalendar(){
-  const mobile=/Android|iPhone|iPad|iPod/i.test(navigator.userAgent)||(navigator.platform==='MacIntel'&&navigator.maxTouchPoints>1);
-  mobile?calendarICS():googleCalendar();
+  const ios=/iPhone|iPad|iPod/i.test(navigator.userAgent)||(navigator.platform==='MacIntel'&&navigator.maxTouchPoints>1);
+  ios?calendarICS('open'):googleCalendar();      // Android + desktop: Google Calendar opens straight to a ready-filled event
 }
-on('calendarBtn','click',addCalendar);on('calendarBtn2','click',addCalendar);
+on('calendarBtn','click',addCalendar);on('calendarBtn2','click',addCalendar);on('icsBtn','click',()=>calendarICS('download'));
 
 /* ---------- RSVP ---------- */
 on('attendance','change',()=>{const no=$('attendance').value==='Regretfully declines';$('guests').disabled=no;$('guestsWrap').style.opacity=no?.5:1});

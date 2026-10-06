@@ -484,6 +484,25 @@ h1{
   height:min(95px,27vw);
 }
 
+/* Share Your Memories */
+.memories-card{text-align:center;position:relative;overflow:hidden;padding:clamp(24px,5vw,38px);border:1px solid rgba(117,145,166,.18);background:linear-gradient(145deg,rgba(255,255,255,.98),rgba(241,248,251,.96));box-shadow:0 18px 45px rgba(35,62,93,.09)}
+.memories-card:before{content:"";position:absolute;inset:0;background:radial-gradient(circle at 50% 0%,rgba(216,231,238,.7),transparent 58%);pointer-events:none}
+.memories-card > *{position:relative;z-index:1}
+.memories-icon{width:64px;height:64px;margin:0 auto 15px;border-radius:20px;display:grid;place-items:center;background:linear-gradient(145deg,#eef5f8,#dceaf0);color:var(--slate);box-shadow:0 10px 25px rgba(35,62,93,.10);border:1px solid rgba(255,255,255,.9)}
+.memories-icon svg{width:31px;height:31px;stroke:currentColor;stroke-width:1.65;fill:none;stroke-linecap:round;stroke-linejoin:round}
+.memories-title{font-family:Georgia,serif;font-size:clamp(24px,5vw,31px);color:var(--navy);margin:0 0 8px}
+.memories-copy{max-width:620px;margin:0 auto 20px}
+.memories-upload{max-width:560px;margin:0 auto 16px;padding:18px;border:1px dashed rgba(91,123,146,.42);border-radius:18px;background:rgba(255,255,255,.62);transition:transform .2s ease,box-shadow .2s ease,border-color .2s ease}
+.memories-upload:hover{transform:translateY(-2px);border-color:rgba(91,123,146,.7);box-shadow:0 12px 28px rgba(35,62,93,.08)}
+.memories-upload-icon{width:40px;height:40px;margin:0 auto 8px;border-radius:12px;display:grid;place-items:center;background:#edf5f8;color:#55748c}
+.memories-upload-icon svg{width:22px;height:22px;stroke:currentColor;stroke-width:1.8;fill:none;stroke-linecap:round;stroke-linejoin:round}
+.memories-upload-label{font-size:15px;font-weight:700;color:var(--navy);margin-bottom:3px}
+.memories-upload-sub{font-size:12px;color:#71879a}
+.memories-cta{display:inline-flex!important;align-items:center;justify-content:center;gap:9px;min-width:235px}
+.memories-cta svg{width:18px;height:18px;stroke:currentColor;stroke-width:1.8;fill:none;stroke-linecap:round;stroke-linejoin:round}
+.memories-note{font-size:12px;color:#71879a;margin-top:8px;line-height:1.5}
+@media(max-width:520px){.memories-card .btn{width:100%}.memories-upload{padding:16px}.memories-cta{min-width:0}}
+
 /* Footer */
 .footer{
   max-width:100%;
@@ -800,6 +819,15 @@ a.btn{text-decoration:none;display:inline-flex;align-items:center;justify-conten
 .venue-notes p{margin:10px 0;line-height:1.7;font-size:17px}
 .venue-notes strong{color:var(--navy)}
 
+/* RSVP confirmation */
+.rsvp-confirmation{margin-top:4px;padding:18px 16px;border:1px solid rgba(129,156,176,.22);border-radius:18px;background:linear-gradient(180deg,rgba(240,247,250,.9),rgba(255,255,255,.96));text-align:center;box-shadow:0 10px 28px rgba(35,62,93,.07);animation:rsvpConfirmIn .45s ease both}
+.rsvp-confirm-icon{width:42px;height:42px;margin:0 auto 9px;border-radius:50%;display:grid;place-items:center;background:#e7f0f2;color:var(--slate);font-weight:700;font-size:19px}
+.rsvp-confirm-title{font-family:Georgia,serif;font-size:20px;color:var(--slate);line-height:1.25}
+.rsvp-confirm-text{margin-top:6px;color:#526a82;font-size:14px;line-height:1.55}
+.rsvp-confirm-note{margin-top:7px;color:#7a8da1;font-size:12px;line-height:1.45}
+.rsvp-submitted .btn[type="submit"]{opacity:.7;pointer-events:none}
+@keyframes rsvpConfirmIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+
 /* RSVP + gift helpers */
 .rsvp-meta{margin:10px auto 0;font-size:17px;line-height:1.7}
 .rsvp-meta a,.link{color:var(--navy);text-underline-offset:3px;font-weight:600}
@@ -816,11 +844,6 @@ a.btn{text-decoration:none;display:inline-flex;align-items:center;justify-conten
 .countdown-sub{font-size:18px;color:var(--ink)}
 .nav-toggle[aria-expanded="true"]{background:var(--slate)}
 .music[aria-pressed="true"]{background:#2c5486}
-
-/* Scroll cue: centre word and arrow on the page's middle line */
-.hero-scroll{display:flex;flex-direction:column;align-items:center;text-align:center;width:max-content;padding-left:4px;line-height:1.2}
-.hero-scroll span{margin-top:2px;line-height:1}
-.hero-when .hw{display:block}
 </style>
 </head>
 <body>
@@ -845,7 +868,7 @@ a.btn{text-decoration:none;display:inline-flex;align-items:center;justify-conten
   <div class="floating-nav">
     <button class="nav-toggle" id="navToggle" type="button" aria-label="Open invitation menu" aria-expanded="false" aria-controls="navMenu">☰</button>
     <nav class="nav-menu" id="navMenu" aria-label="Invitation sections">
-      <a href="#hero">Home</a><a href="#story">Our Story</a><a href="#details">The Day</a><a href="#venue">Venue</a><a href="#rsvp">RSVP</a><a href="#registry">Gifts</a>
+      <a href="#hero">Home</a><a href="#story">Our Story</a><a href="#details">The Day</a><a href="#venue">Venue</a><a href="#rsvp">RSVP</a><a href="#memories">Memories</a><a href="#registry">Gifts</a>
     </nav>
   </div>
 
@@ -954,6 +977,27 @@ a.btn{text-decoration:none;display:inline-flex;align-items:center;justify-conten
       </div>
     </div>
 
+    <!-- Share Your Memories -->
+    <div class="section" id="memories">
+      <h2 class="section-title">Share Your Memories</h2>
+      <div class="card memories-card">
+        <div class="memories-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24"><path d="M4 7.5A2.5 2.5 0 0 1 6.5 5h2l1.3-1.7h4.4L15.5 5h2A2.5 2.5 0 0 1 20 7.5v9A2.5 2.5 0 0 1 17.5 19h-11A2.5 2.5 0 0 1 4 16.5z"/><circle cx="12" cy="12" r="3.7"/><path d="M17.2 8.1h.01"/></svg>
+        </div>
+        <h3 class="memories-title">Capture the Moments</h3>
+        <p class="section-text memories-copy">We would love to relive the joy through your eyes. Share your favourite photos and videos from our special day and help us create a beautiful collection of memories.</p>
+        <div class="memories-upload" aria-hidden="true">
+          <div class="memories-upload-icon"><svg viewBox="0 0 24 24"><path d="M12 16V4"/><path d="m7.5 8.5 4.5-4.5 4.5 4.5"/><path d="M5 14v4.5A1.5 1.5 0 0 0 6.5 20h11a1.5 1.5 0 0 0 1.5-1.5V14"/></svg></div>
+          <div class="memories-upload-label">Your photos & videos</div>
+          <div class="memories-upload-sub">Upload them securely to our shared wedding memories folder</div>
+        </div>
+        <div class="btn-row">
+          <a class="btn gold memories-cta" href="https://www.dropbox.com/scl/fo/pa3kjnkcf1gk7ozrn309b/AG2lPqhsKdIDrV50WlN_AY8?rlkey=weeks4sev0gkbs8n5280t3i9i&st=sibfgjte&dl=0" target="_blank" rel="noopener"><svg viewBox="0 0 24 24"><path d="M12 16V4"/><path d="m7.5 8.5 4.5-4.5 4.5 4.5"/><path d="M5 14v4.5A1.5 1.5 0 0 0 6.5 20h11a1.5 1.5 0 0 0 1.5-1.5V14"/></svg>Upload Photos &amp; Videos</a>
+        </div>
+        <div class="memories-note">You’ll be taken to our shared Dropbox folder to add your memories.</div>
+      </div>
+    </div>
+
     <!-- Gifts -->
     <div class="section" id="registry">
       <h2 class="section-title">A Gift From The Heart</h2>
@@ -994,10 +1038,10 @@ const W = {
   dateISO: '2026-11-07',            // YYYY-MM-DD
 
   // Times in 24-hour format, Kenya time. Example: '11:00'
-  ceremonyTime: '10:00',            // start time, 24-hour, Kenya time
+  ceremonyTime: '',                 // e.g. '11:00'  <- ADD THIS
   receptionTime: '',                // e.g. '14:00'
   arrivalTime: '',                  // e.g. '10:30'  (shown as "Please be seated by")
-  endTime: '18:00',                 // end time (also used for the calendar entry)
+  endTime: '',                      // e.g. '18:00'  (for the calendar entry; default = 6 hours after start)
 
   venue: 'Eureka Gardens',
   place: 'Kikuyu, Kenya',
@@ -1006,7 +1050,7 @@ const W = {
   parking: '',                      // e.g. 'Free parking on site; please arrive early.'
 
   dressCode: 'Elegant & joyful',
-  palette: '',                       // optional colour note under the dress code, e.g. 'Soft pastels'
+  palette: 'Powder blue, navy, ivory & gold',   // set '' to hide
 
   rsvpBy: '',                       // e.g. '24 October 2026'  <- ADD THIS
   contactName: '',                  // e.g. 'Mercy'
@@ -1053,7 +1097,7 @@ document.querySelectorAll('[data-pair]').forEach(e=>e.textContent=pair);
 document.querySelectorAll('[data-bride]').forEach(e=>e.textContent=W.bride);
 document.querySelectorAll('[data-groom]').forEach(e=>e.textContent=W.groom);
 document.title=pair+' — Where Forever Begins';
-$('heroWhen').innerHTML='<strong>'+esc(dateLong)+'</strong>'+(W.ceremonyTime?'<span class="hw">'+esc(fmtTime(W.ceremonyTime)+(W.endTime?' – '+fmtTime(W.endTime):''))+'</span>':'')+'<span class="hw">'+esc(W.venue)+'<span class="sep">·</span>'+esc(W.place)+'</span>';
+$('heroWhen').innerHTML='<strong>'+esc(dateLong)+'</strong>'+(W.ceremonyTime?esc(fmtTime(W.ceremonyTime))+'<span class="sep">·</span>':'')+esc(W.venue)+'<span class="sep">·</span>'+esc(W.place);
 $('revealDate').textContent=dmy.toUpperCase();
 $('revealDay').textContent=weekday.toUpperCase();
 $('venueName').textContent=W.venue+', '+W.place.split(',')[0];
@@ -1063,8 +1107,7 @@ $('footerLine').textContent=(pair+' · '+dmy+' · '+W.venue+', '+W.place.split('
 
 /* ---------- Detail cards ---------- */
 const cards=[['♥','Date',dmy,weekday]];
-const timeRange=W.ceremonyTime?(W.endTime?fmtTime(W.ceremonyTime)+' – '+fmtTime(W.endTime):fmtTime(W.ceremonyTime)):'';
-if(W.ceremonyTime){cards.push(['◷',W.endTime?'Time':'Ceremony',timeRange,W.arrivalTime?'Please be seated by '+fmtTime(W.arrivalTime):'']);}
+if(W.ceremonyTime){cards.push(['◷','Ceremony',fmtTime(W.ceremonyTime),W.arrivalTime?'Please be seated by '+fmtTime(W.arrivalTime):'']);}
 if(W.receptionTime){cards.push(['❀','Reception',fmtTime(W.receptionTime),'']);}
 cards.push(['⌖','Venue',W.venue,W.place]);
 if(W.dressCode){cards.push(['✧','Dress code',W.dressCode,W.palette]);}
@@ -1185,17 +1228,28 @@ function eventInfo(){
   if(W.rsvpBy)lines.push('Kindly RSVP by '+W.rsvpBy+'.');
   return {timed,end,where,desc:lines.join(' ')};
 }
+function calendarICS(){
+  const ev=eventInfo();
+  const dt=ev.timed?['DTSTART:'+utc(start),'DTEND:'+utc(ev.end)]:['DTSTART;VALUE=DATE:'+ymd(W.dateISO),'DTEND;VALUE=DATE:'+ymd(nextDay(W.dateISO))];
+  const text=['BEGIN:VCALENDAR','VERSION:2.0','PRODID:-//'+pair+'//Wedding//EN','CALSCALE:GREGORIAN','BEGIN:VEVENT','UID:wedding-'+ymd(W.dateISO)+'@invite','DTSTAMP:'+utc(new Date()),...dt,
+    'SUMMARY:'+pair+' — Wedding','LOCATION:'+ev.where.replace(/,/g,'\\,'),'DESCRIPTION:'+ev.desc.replace(/,/g,'\\,'),
+    'BEGIN:VALARM','ACTION:DISPLAY','DESCRIPTION:Wedding tomorrow','TRIGGER:-P1D','END:VALARM','END:VEVENT','END:VCALENDAR'].join('\r\n');
+  const blob=new Blob([text],{type:'text/calendar;charset=utf-8'}),url=URL.createObjectURL(blob),a=document.createElement('a');
+  a.href=url;a.download=pair.replace(/[^\w]+/g,'-')+'-Wedding.ics';document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(url),1000);
+}
 function googleCalendar(){
   const ev=eventInfo();
   const dates=ev.timed?utc(start)+'/'+utc(ev.end):ymd(W.dateISO)+'/'+ymd(nextDay(W.dateISO));
-  const url='https://calendar.google.com/calendar/render?action=TEMPLATE&text='+encodeURIComponent(pair+' — Wedding')+'&dates='+dates+'&details='+encodeURIComponent(ev.desc)+'&location='+encodeURIComponent(ev.where);
-  const touch=/Android|iPhone|iPad|iPod/i.test(navigator.userAgent)||(navigator.platform==='MacIntel'&&navigator.maxTouchPoints>1);
-  if(touch){window.location.href=url}else{window.open(url,'_blank','noopener')}
+  window.open('https://calendar.google.com/calendar/render?action=TEMPLATE&text='+encodeURIComponent(pair+' — Wedding')+'&dates='+dates+'&details='+encodeURIComponent(ev.desc)+'&location='+encodeURIComponent(ev.where),'_blank','noopener');
 }
-function addCalendar(){googleCalendar()}
+function addCalendar(){
+  const mobile=/Android|iPhone|iPad|iPod/i.test(navigator.userAgent)||(navigator.platform==='MacIntel'&&navigator.maxTouchPoints>1);
+  mobile?calendarICS():googleCalendar();
+}
 on('calendarBtn','click',addCalendar);on('calendarBtn2','click',addCalendar);
 
 /* ---------- RSVP ---------- */
+function escapeHtml(value){return String(value).replace(/[&<>"']/g,ch=>({'&':'&amp;','<':'&lt;','>':'&gt;','\"':'&quot;',"'":'&#39;'}[ch]));}
 on('attendance','change',()=>{const no=$('attendance').value==='Regretfully declines';$('guests').disabled=no;$('guestsWrap').style.opacity=no?.5:1});
 on('rsvpForm','submit',e=>{
   e.preventDefault();
@@ -1207,8 +1261,9 @@ on('rsvpForm','submit',e=>{
   if(W.rsvpEndpoint){
     try{fetch(W.rsvpEndpoint,{method:'POST',mode:'no-cors',keepalive:true,body:new URLSearchParams({name:name,phone:phone,response:attendance,guests:guests,message:message})})}catch(_){}
   }
-  $('rsvpStatus').textContent='Opening WhatsApp with your RSVP…';
-  window.open('https://wa.me/'+W.rsvpWhatsApp+'?text='+encodeURIComponent(lines.join('\n')),'_blank','noopener');
+  $('rsvpStatus').innerHTML='<div class="rsvp-confirmation"><div class="rsvp-confirm-icon" aria-hidden="true">✓</div><div class="rsvp-confirm-title">Thank You, '+escapeHtml(name)+' 🤍</div><div class="rsvp-confirm-text">Your RSVP has been prepared. We look forward to celebrating with you.</div><div class="rsvp-confirm-note">WhatsApp will open shortly to send your RSVP to Derrick & Tabitha.</div></div>';
+  $('rsvpForm').classList.add('rsvp-submitted');
+  setTimeout(()=>window.open('https://wa.me/'+W.rsvpWhatsApp+'?text='+encodeURIComponent(lines.join('\n')),'_blank','noopener'),250);
 });
 
 /* ---------- M-Pesa copy ---------- */
